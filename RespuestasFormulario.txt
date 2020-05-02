@@ -40,4 +40,4 @@ El pipeline gráfico puede diferenciar dentro de los vértices cuales son textur
 En cada escena solo se encuentran cargadas en la GPU aquellas meshes que se encuentran dentro de la visión de la cámara (frustrum), el resto de meshes no serán dibujadas pues se encuentran fuera.
 Al cambiar de escena en caso de nuevas meshes aparezcan o dejen de verse dentro del frustrum se cargarán o no en la GPU.
 
-En la primera escena se encuentran 4 meshes cargadas, en la segunda 2 y en la tercera al principio hay dos, el cubo amarillo y el cubo negro enorme de la escena 2, el resto de meshes en esta escena se van cargando a medida de que la camara se mueve.
+En la primera escena se encuentran 4 meshes cargadas, en la segunda 2 y en la tercera hay dos planos, en la última cámara, se encuentran el cubo amarillo y el cubo gris enorme de la escena 2, el resto de meshes en esta escena se van cargando a medida de que la camara se mueve.
