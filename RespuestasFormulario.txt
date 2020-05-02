@@ -1,0 +1,43 @@
+1.  ​Enumera y define en orden los diferentes pasos del pipeline gráfico desde la subida de datos de CPU-GPU hasta el output merge.
+
+Vertex Buffer Object (VBO): Es una feature de OpenGL que nos permite cargar datos de vértices (posición, dirección, vector normal, color, etc...)
+Geometry: Se aplican transformaciones geométricas a los vértices de los polígonos, declarados como modelos primitivos. 
+Clipping: Las primitivas que se encuentren dentro del frustrum serán dibujadas, el resto de primitivas fuera del frustrum (o campo visual) no serán dibujadas.
+Fs 
+Image Vertex Shader (GPU): Consigue la transformación en el mundo de la imagen o modelo que se quiere "dibujar".
+Geometry Shader: Procesa primitivas enteras, desde vértices hasta triangulos.
+Rasterization: Se crean fragmentos a partir de primitivas continuas
+Fs
+Assembly Image: Crear la imagen
+Ps
+
+2. ¿Qué matrices intervienen en la transformación de un vértice para pasar de coordenadas locales de modelo a coordenadas homogéneas? Enumera cada transformación y qué matriz interviene en cada una de estas.
+
+Model View Projection Matrix (Transformación que tiene en el mundo el modelo, es la transformación en el mundo)
+
+Model --> Transforma de coordenadas locales a coordenadas en el mundo
+View -->  La transformación de la camara en el mundo (Del mundo a coordenadas de camara)
+Projection --> Lo pasa a coordenadas homogeneas, coordenadas proyectivas (Matriz que hace que las coordenadas de camara pasen a ser coordenadas proyectadas)
+
+
+3. ¿Qué es un shader? ¿Qué tipos de shader son los más comunes y para qué sirven? ¿Dónde se compilan y se ejecutan los Shaders? 
+
+Los shaders se encargan de realizar cálculos gráficos, por ejemplo asignarle color a un pixel, calcular las transformaciones de los vértices.
+
+Pixel Shader: Asigna el valor del color y otros atributos a cada fragmento.
+Vertex Shader: Coge la transformación de cada vértice 3D en la posición del mundo virtual y lo convierte en las coordenadas 2D en las que aparece por pantalla.
+Geometry Shader: Procesa primitivas enteras, desde vértices hasta triangulos.
+
+Los shaders de suelen codificar y ejecutar en la GPU.
+
+4.  ​Al cargar una mesh, ¿Qué ocurre con estos vértices, qué implica esta carga? ¿Qué pasamos al pipeline gráfico, cómo sabe el pipeline gráfico diferenciar dentro de todos los vértices qué son las posiciones/normales/texturas?
+
+Al cargar una mesh lo que estamos haciendo es enviar al pipeline los atributos de los vértices que conforma la mesh, posición, color, opacidad, textura (UVs), etc... 
+El pipeline gráfico puede diferenciar dentro de los vértices cuales son texturas o posiciones gracias a las variables que le pasamos, por ejemplo para una textura le asignaremos aparte de en que posición se encuentra y color (como se harían con los vértices normales), para las texturas también le pasamos las UVs.
+
+5. Dentro de las 3 escenas diferentes que has realizado podrías enumerar cuántas meshes cargadas se encuentran en la GPU, matrices, uniformes... 
+
+En cada escena solo se encuentran cargadas en la GPU aquellas meshes que se encuentran dentro de la visión de la cámara (frustrum), el resto de meshes no serán dibujadas pues se encuentran fuera.
+Al cambiar de escena en caso de nuevas meshes aparezcan o dejen de verse dentro del frustrum se cargarán o no en la GPU.
+
+En la primera escena se encuentran 4 meshes cargadas, en la segunda 2 y en la tercera al principio hay dos, el cubo amarillo y el cubo negro enorme de la escena 2, el resto de meshes en esta escena se van cargando a medida de que la camara se mueve.
